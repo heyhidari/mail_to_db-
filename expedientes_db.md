@@ -1,4 +1,4 @@
-# Pseudocode to extract students and add them to a SQLite DB
+# Pseudocode to extract students and add them to a MongoDB Project
 
 ## Main
 1. Ingresar el archivo para integrar los nombres a la BD (¿formatos permitidos? WORD [docx, doc] , EXCEL [xlsm, xlsx, xls])
