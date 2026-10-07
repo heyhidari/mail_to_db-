@@ -10,27 +10,80 @@ POR MEJORAR:
 - Asegurar que la ruta de archivos sea válida, por ahora sólo se busca y envía un error a posteriori.
 '''
 import helper_objects as obj
-import readxl
-import readwd
+import readxl as xl
+import readwd as wd
 
 from sys import argv
 
 
 def main():
-    print("Running")
+    print("TEST Running")
+    folder_root = "/Users/hidari/Downloads/"
     # Read argv values
     if len(argv) < 2:
-        print("Intenta de nuevo, agrega la ruta del archivo que será agregado a la base de datos")
+        print("Intenta de nuevo, agrega el nombre del archivo que será agregado a la base de datos. DEBE ESTAR EN DOWNLOADS")
         return
 
-    # Analize the file name format
-    file_name = argv[1]
-    file_name_format = file_name.split('_')
+    # Analize the file type
+    file_name = folder_root + argv[1]
+    extension = file_name.rsplit(".",2)
+
+    if extension[1] not in ["xlsm", "xlsb"]:
+        print(extension, "Este archivo no es compatible conmigo, revísalo.")
+        return
+    else:
+        print("File is correct")
     
-    if len(file_name_format) < 3:
+    # Analize file name format in case we can retrieve data from here
+    file_name_format = argv[1].split('_')
+    fac = ""
+    gdo = ""
+    carr = ""
+    fec = ""
+
+    if len(file_name_format) < 4:
+        print("Este archivo tiene errores en el formato del nombre. Notificar al remitente.")
+        return
+    else:
+        fac = file_name_format[0]
+        gdo = file_name_format[1]
+        carr = file_name_format[2]
+        fec = file_name_format[3].strip(extension[1]).strip(".")
+
+        print(fac, gdo, carr, fec)
+
+    # Open file
+    print("Opening file")
+    archivo = xl.wb(file_name)
+    hoja1 = archivo["Hoja1"]
+
+    # Iterate data sent from Escuela
+    for cell in hoja1.iter_rows(min_row=2, min_col=10, max_row=6, max_col=10, values_only=True):
+        print(cell)
+
+    """
+    TODO: 
+    Assign variable values read from J2 to J6 to the helper_object Escuela
+    
+    """    
+    print("Closing file")
+    archivo.close()
+
+    print("TEST END")
+    return
+
+    if len(file_name_format) < 3 or len(file_name_format) > 4:
         print("El formato del nombre de archivo no es adecuado para realizar esta operación")
-        
         # TODO: Abrir módulo cambiar nombre
+        """
+        Módulo para cambiar nombre del archivo a algo que sea compatible con:
+
+        Facultad_Grado_Carrera_Fecha
+
+        De esta manera se asegura que todos los archivos sean compatibles con este nombre
+        Sin embargo, queda pendiente limitar las opciones al Formato Digital, es decir,
+        falta excluir los archivos que no son de excel 
+        """
     else:
         print('Processing file')
 
