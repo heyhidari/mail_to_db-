@@ -79,7 +79,7 @@ def main():
     # Check the 
     """
     TODO: 
-    Assign variable values read from J2 to J6 to the helper_object Escuela
+    Create the function to modify any empty values in Escuela
     
     """    
     print("Closing file")
