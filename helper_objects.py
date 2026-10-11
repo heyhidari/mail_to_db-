@@ -7,16 +7,17 @@ ALUMNO: Es cada uno de los elementos que son encontrados en el archivo enviado p
 import regex 
 
 class Escuela:
-    def __init__(self, siglas: str, grado: str, carrera: str, fecha_envio: str, expedientes: list = []):
+    def __init__(self, siglas: str, grado: str, carrera: str, fecha_envio: str, num_exp: int, responsable: str):
         self._siglas = siglas
         self._grado = grado
         self._carrera = carrera
         self._fecha_envio = fecha_envio
-        self._expedientes = expedientes
+        self._expedientes = num_exp
+        self._responsable = responsable
 
 
     def __str__(self):
-        return f'{self._siglas} envía {len(self._expedientes)} expedientes de {self._grado} en {self._carrera} en la fecha {self._fecha_envio}'
+        return f'{self._siglas}, a través de {self._responsable} envía {self._expedientes} expedientes de {self._grado} en {self._carrera} en la fecha {self._fecha_envio}'
 
 
 class Alumno:

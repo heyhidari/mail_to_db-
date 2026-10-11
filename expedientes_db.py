@@ -10,6 +10,7 @@ POR MEJORAR:
 - Asegurar que la ruta de archivos sea válida, por ahora sólo se busca y envía un error a posteriori.
 '''
 import helper_objects as obj
+import helper_functions as func
 import readxl as xl
 import readwd as wd
 
@@ -21,7 +22,7 @@ def main():
     folder_root = "/Users/hidari/Downloads/"
     # Read argv values
     if len(argv) < 2:
-        print("Intenta de nuevo, agrega el nombre del archivo que será agregado a la base de datos. DEBE ESTAR EN DOWNLOADS")
+        print("Intenta de nuevo, incluye el nombre del archivo. DEBE ESTAR EN LA CARPETA DOWNLOADS")
         return
 
     # Analize the file type
@@ -57,10 +58,25 @@ def main():
     archivo = xl.wb(file_name)
     hoja1 = archivo["Hoja1"]
 
-    # Iterate data sent from Escuela
+    # Iterate data sent from Escuela (iter_rows gets data as a single value tuple)
+    data_from_sender = []
     for cell in hoja1.iter_rows(min_row=2, min_col=10, max_row=6, max_col=10, values_only=True):
-        print(cell)
+        data_from_sender.append(cell[0])
 
+    sender = obj.Escuela(
+        siglas=data_from_sender[0],
+        grado=data_from_sender[4],
+        carrera="",
+        fecha_envio=data_from_sender[3],
+        num_exp=data_from_sender[2],
+        responsable=data_from_sender[1])
+
+    # Check up for empty values in the sender, (TBD correct and continue)
+    print("testing helper_functions")
+    func.is_sender_empty(sender)
+    print("end_testing helper_functions")
+
+    # Check the 
     """
     TODO: 
     Assign variable values read from J2 to J6 to the helper_object Escuela
