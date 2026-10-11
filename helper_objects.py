@@ -19,6 +19,14 @@ class Escuela:
     def __str__(self):
         return f'{self._siglas}, a través de {self._responsable} envía {self._expedientes} expedientes de {self._grado} en {self._carrera} en la fecha {self._fecha_envio}'
 
+    def is_sender_empty(self):
+        for attr in dir(self):
+            if not attr.startswith("__"):
+                print(attr)
+            
+        
+
+
 
 class Alumno:
     def __init__(self, CURP:str, primer_ap:str, segundo_ap:str, nombre: str, modalidad:str = ""):
