@@ -72,9 +72,9 @@ def main():
         responsable=data_from_sender[1])
 
     # Check up for empty values in the sender, (TBD correct and continue)
-    print("testing helper_functions")
+    print(" testing helper_functions")
     func.is_sender_empty(sender)
-    print("end_testing helper_functions")
+    print(" end_testing helper_functions")
 
     # Check the 
     """
