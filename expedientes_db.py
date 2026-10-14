@@ -64,7 +64,7 @@ def main():
         data_from_sender.append(cell[0])
 
     sender = obj.Escuela(
-        siglas="",
+        siglas=data_from_sender[0],
         grado=data_from_sender[4],
         carrera="",
         fecha_envio=data_from_sender[3],
@@ -74,10 +74,11 @@ def main():
     # Check up for empty values in the sender, (TBD correct and continue)
     sender.is_sender_empty()
 
-    print(" testing helper_functions")
-    print(" end_testing helper_functions")
-
     # Check the 
+    print(" => testing helper_functions")
+    print(" <= testing helper_functions")
+
+    # Close file
     print("Closing file")
     archivo.close()
 

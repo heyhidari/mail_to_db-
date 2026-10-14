@@ -27,7 +27,9 @@ class Escuela:
             else:
                 continue
         
-        print("Los datos del remitente parecen ser correctos:\n", self.__dict__)
+        print("Los datos del remitente parecen ser correctos:")
+        for item in self.__dict__.items():
+            print(item[0], ": ", item[1])
 
 
     # Reescribe atributos si los datos de la Unidad Académica que envía son Nulos o Incorrectos
