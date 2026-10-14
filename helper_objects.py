@@ -21,34 +21,31 @@ class Escuela:
 
     # Verifica que los datos de la Unidad Académica sean correctos
     def is_sender_empty(self):
-        for attr in vars(self):
-            if not attr.startswith("__"):
-                """
-                TODO
-                This part should loop through the attributes of Escuela and determine if they are empty
-                If so, call __mod_sender
-                
-                print(callable(attr))
-                print(getattr(attr))
-                """
+        for item in self.__dict__.items():
+            if item[1] == "" or item[1] == None:
+                self.__mod_sender()
+            else:
+                continue
+        
+        print("Los datos del remitente parecen ser correctos:\n", self.__dict__)
+
 
     # Reescribe atributos si los datos de la Unidad Académica que envía son Nulos o Incorrectos
     def __mod_sender(self):
-        if self._siglas == "":
-            self._siglas = input("Escriba la Unidad Académica que corresponda")
-        elif self._grado == "":
-            self._grado = input("Escriba el grado académico que corresponda")
-        elif self._carrera == "":
-            self._carrera = input("Escriba la carrera que corresponda")
-        elif self._fecha_envio == "":
-            self._fecha_envio = input("Escriba la fecha de envío que corresponda (dd/mm/aaaa)")
-        elif self._expedientes == "":
-            self._expedientes = int(input("Escriba con número la cantidad de expedientes que corresponda"))
-        elif self._responsable == "":
-            self._responsable = input("Escriba el nombre de la persona responsable del envío")
+        if self._siglas == "" or self._siglas == None:
+            self._siglas = input("Escriba la Unidad Académica que corresponda:\n")
+        elif self._grado == "" or self._grado == None:
+            self._grado = input("Escriba el grado académico que corresponda:\n")
+        elif self._carrera == "" or self._carrera == None:
+            self._carrera = input("Escriba la carrera que corresponda\n")
+        elif self._fecha_envio == "" or self._fecha_envio == None:
+            self._fecha_envio = input("Escriba la fecha de envío que corresponda (dd/mm/aaaa)\n")
+        elif self._expedientes == "" or self._expedientes == None:
+            self._expedientes = int(input("Escriba con número la cantidad de expedientes que corresponda\n"))
+        elif self._responsable == "" or self._responsable == None:
+            self._responsable = input("Escriba el nombre de la persona responsable del envío\n")
         else:
             raise Exception
-        
             
 
 class Alumno:
