@@ -71,11 +71,30 @@ def main():
         num_exp=data_from_sender[2],
         responsable=data_from_sender[1])
 
-    # Check up for empty values in the sender, (TBD correct and continue)
+    # Check for empty values in the sender, (TBD correct and continue)
     sender.is_sender_empty()
 
-    # Check the 
+    
+    # Check for alumni data
     print(" => testing helper_functions")
+    """
+    TODO
+        1. Create the procedure that will locate the B20 cell
+        2. Read the contents of the headlines since there are some schools that changed the format
+        3. Locate all the content of a single student
+        4. Add it to an instance of alumno
+            METHODS:
+            Create the validation test for alumn data
+            _Create the regex validation of CURP
+            _Edit alumn data
+        5. Append instance to dict?? Corroborate to match with MongoDB
+        6. Create MongoDB data base
+        7. Check for duplicates
+        8. If no duplicates in DB, commit alumni data to it
+        9. Message of success!
+    """
+
+    
     print(" <= testing helper_functions")
 
     # Close file
