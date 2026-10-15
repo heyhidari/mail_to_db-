@@ -109,7 +109,6 @@ def main():
         4. Add it to an instance of alumno
             METHODS:
             Create the validation test for alumn data
-            _Create the regex validation of CURP
             _Edit alumn data
         5. Append instance to dict?? Corroborate to match with MongoDB
         6. Create MongoDB data base

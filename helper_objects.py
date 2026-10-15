@@ -52,17 +52,25 @@ class Escuela:
 
 class Alumno:
     def __init__(self, CURP:str, primer_ap:str, segundo_ap:str, nombre: str, modalidad:str = "", especialidad:str = ""):
-        self._curp = CURP
-        self._primer_ap = primer_ap
-        self._segundo_ap = segundo_ap
-        self._nombre = nombre
-        self._modalidad = modalidad
-        self._especialidad = especialidad
+        self._curp = CURP.strip()
+        self._primer_ap = primer_ap.strip()
+        self._segundo_ap = segundo_ap.strip()
+        self._nombre = nombre.strip()
+        self._modalidad = modalidad.strip()
+        self._especialidad = especialidad.strip()
 
-    def __verify_curp__():
-        if Alumno._curp.length < 10:
+        self.__verify_curp__()
+
+    def __verify_curp__(self):
+        if len(self._curp) < 10:
             print("CURP is not consistent with the official format, input the correct one.\n")
             Alumno._curp = input("Type the correct CURP: ")
+        
+        if re.match("[a-zA-z]{4}[0-9]{6}[hHmM][a-zA-Z]{5}..", self._curp):
+            print("Valid\n", self)
+        else:
+            print("Invalid CURP:")
+    
 
     def __str__(self):
         return f'CURP: {self._curp},\nNombre: {self._nombre} {self._primer_ap} {self._segundo_ap},\nModalidad de Titulación: {self._modalidad},\nEspecialidad: {self._especialidad}'
