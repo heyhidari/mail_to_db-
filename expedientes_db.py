@@ -75,9 +75,8 @@ def main():
     # Check for empty values in the sender, (TBD correct and continue)
     sender.is_sender_empty()
 
-    
-    # Check for alumni data, header in table determines some specialties
     print("\n=> testing helper_functions")
+    # Check for alumni data, header in table determines some specialties
     alumni_header = []
     alumni_data = []
 
@@ -85,17 +84,28 @@ def main():
     for cell in hoja1.iter_cols(min_row=19, min_col=2, max_row=19,max_col=12, values_only=True):
         alumni_header.append(cell[0])
 
+    print("\n   Contents of header:\n")
     if alumni_header[-1] is None or "":
-        print(alumni_header)
+        print("This file is from a Non FMC Specialty")
     else:
         print("sender must be from a FMC specialty")
 
+    print("\n   Contents of alumni:\n")
+    # Read the alumni data
+    for cell in hoja1.iter_rows(min_row=20, min_col=2, max_col=12, values_only=True):
+        alumn = obj.Alumno(
+                        CURP=cell[0],
+                        primer_ap=cell[2],
+                        segundo_ap=cell[4],
+                        nombre=cell[6],
+                        modalidad=cell[8])
+        if cell[-1] != (None or ""):
+            alumn._especialidad = cell[10]
+
     
+        
     """ 
     TODO
-        1. Create the procedure that will locate the B20 cell
-        2. Read the contents of the headlines since there are some schools that changed the format
-        3. Locate all the content of a single student
         4. Add it to an instance of alumno
             METHODS:
             Create the validation test for alumn data

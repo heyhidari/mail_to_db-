@@ -4,7 +4,7 @@ This are the objects needed to perform the tasks to analize WORD or EXCEL files 
 ESCUELA: Es el contenedor de los datos de la escuela o facultad que envía el archivo.
 ALUMNO: Es cada uno de los elementos que son encontrados en el archivo enviado por la escuela o facultad.
 '''
-import regex 
+import re
 
 class Escuela:
     def __init__(self, siglas: str, grado: str, carrera: str, fecha_envio: str, num_exp: int, responsable: str):
@@ -51,12 +51,13 @@ class Escuela:
             
 
 class Alumno:
-    def __init__(self, CURP:str, primer_ap:str, segundo_ap:str, nombre: str, modalidad:str = ""):
+    def __init__(self, CURP:str, primer_ap:str, segundo_ap:str, nombre: str, modalidad:str = "", especialidad:str = ""):
         self._curp = CURP
         self._primer_ap = primer_ap
         self._segundo_ap = segundo_ap
         self._nombre = nombre
         self._modalidad = modalidad
+        self._especialidad = especialidad
 
     def __verify_curp__():
         if Alumno._curp.length < 10:
@@ -64,4 +65,4 @@ class Alumno:
             Alumno._curp = input("Type the correct CURP: ")
 
     def __str__(self):
-        return f'CURP: {self._curp}, Nombre: {self._nombre} {self._primer_ap} {self._segundo_ap}, Modalidad de Titulación: {self._modalidad}'
+        return f'CURP: {self._curp},\nNombre: {self._nombre} {self._primer_ap} {self._segundo_ap},\nModalidad de Titulación: {self._modalidad},\nEspecialidad: {self._especialidad}'
