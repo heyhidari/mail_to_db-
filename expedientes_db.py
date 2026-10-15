@@ -63,6 +63,7 @@ def main():
     for cell in hoja1.iter_rows(min_row=2, min_col=10, max_row=6, max_col=10, values_only=True):
         data_from_sender.append(cell[0])
 
+    # Create a Escuela instance to analize the contents of the sender
     sender = obj.Escuela(
         siglas=data_from_sender[0],
         grado=data_from_sender[4],
@@ -75,9 +76,22 @@ def main():
     sender.is_sender_empty()
 
     
-    # Check for alumni data
-    print(" => testing helper_functions")
-    """
+    # Check for alumni data, header in table determines some specialties
+    print("\n=> testing helper_functions")
+    alumni_header = []
+    alumni_data = []
+
+    # Determine the type of header
+    for cell in hoja1.iter_cols(min_row=19, min_col=2, max_row=19,max_col=12, values_only=True):
+        alumni_header.append(cell[0])
+
+    if alumni_header[-1] is None or "":
+        print(alumni_header)
+    else:
+        print("sender must be from a FMC specialty")
+
+    
+    """ 
     TODO
         1. Create the procedure that will locate the B20 cell
         2. Read the contents of the headlines since there are some schools that changed the format
@@ -95,7 +109,7 @@ def main():
     """
 
     
-    print(" <= testing helper_functions")
+    print(" <= testing helper_functions\n")
 
     # Close file
     print("Closing file")
