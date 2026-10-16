@@ -91,6 +91,7 @@ def main():
         print("sender must be from a FMC specialty")
 
     print("\n   Contents of alumni:\n")
+    
     # Read the alumni data
     for cell in hoja1.iter_rows(min_row=20, min_col=2, max_col=12, values_only=True):
         alumn = obj.Alumno(

@@ -15,7 +15,6 @@ class Escuela:
         self._expedientes = num_exp
         self._responsable = responsable
 
-
     def __str__(self):
         return f'{self._siglas}, a través de {self._responsable} envía {self._expedientes} expedientes de {self._grado} en {self._carrera} en la fecha {self._fecha_envio}'
 
@@ -30,7 +29,6 @@ class Escuela:
         print("Los datos del remitente parecen ser correctos:")
         for item in self.__dict__.items():
             print(item[0], ": ", item[1])
-
 
     # Reescribe atributos si los datos de la Unidad Académica que envía son Nulos o Incorrectos
     def __mod_sender(self):
@@ -60,17 +58,19 @@ class Alumno:
         self._especialidad = especialidad.strip()
 
         self.__verify_curp__()
+    
+    def __str__(self):
+        return f'CURP: {self._curp},\nNombre: {self._nombre} {self._primer_ap} {self._segundo_ap},\nModalidad de Titulación: {self._modalidad},\nEspecialidad: {self._especialidad}'
 
     def __verify_curp__(self):
         if len(self._curp) < 10:
             print("CURP is not consistent with the official format, input the correct one.\n")
-            Alumno._curp = input("Type the correct CURP: ")
+            self._curp = input("Type the correct CURP: ")
         
         if re.match("[a-zA-z]{4}[0-9]{6}[hHmM][a-zA-Z]{5}..", self._curp):
             print("Valid\n", self)
         else:
-            print("Invalid CURP:")
-    
+            self._curp = input("Type the correct CURP: ")
 
-    def __str__(self):
-        return f'CURP: {self._curp},\nNombre: {self._nombre} {self._primer_ap} {self._segundo_ap},\nModalidad de Titulación: {self._modalidad},\nEspecialidad: {self._especialidad}'
+    def is_alumn_empty(self):
+        
