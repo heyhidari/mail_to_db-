@@ -5,6 +5,7 @@ ESCUELA: Es el contenedor de los datos de la escuela o facultad que envía el ar
 ALUMNO: Es cada uno de los elementos que son encontrados en el archivo enviado por la escuela o facultad.
 '''
 import re
+import pymongo
 
 class Escuela:
     def __init__(self, siglas: str, grado: str, carrera: str, fecha_envio: str, num_exp: int, responsable: str):
@@ -82,4 +83,4 @@ class Alumno:
         elif self._modalidad is (None or ""):
             self._modalidad = input("Ingresa la modalidad de titulación")
         
-        
+
