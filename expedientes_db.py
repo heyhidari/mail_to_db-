@@ -80,7 +80,13 @@ def main():
     alumni_header = []
     alumni_data = []
 
+    
     # Determine the type of header
+    """
+    This fragment is not being used so far, but I left it so that it can develop further once more formats
+    are added to be read, since a good number of schools have special needs and could be easier for everyone
+    to have a specific format for their needs.
+    """
     for cell in hoja1.iter_cols(min_row=19, min_col=2, max_row=19,max_col=12, values_only=True):
         alumni_header.append(cell[0])
 
@@ -92,25 +98,27 @@ def main():
 
     print("\n   Contents of alumni:\n")
     
-    # Read the alumni data
-    for cell in hoja1.iter_rows(min_row=20, min_col=2, max_col=12, values_only=True):
+    
+    # Read the alumni data, create Alumno instances and validate data structure.
+    for cell in hoja1.iter_rows(min_row=20, min_col=2, max_col=12, values_only=True): 
+        for i in range(0, 10):
+            if cell[i] == None:
+                cell[i] = "" 
+
         alumn = obj.Alumno(
-                        CURP=cell[0],
-                        primer_ap=cell[2],
-                        segundo_ap=cell[4],
-                        nombre=cell[6],
-                        modalidad=cell[8])
-        if cell[-1] != (None or ""):
-            alumn._especialidad = cell[10]
+                CURP = cell[0],
+                primer_ap = cell[2],
+                segundo_ap = cell[4],
+                nombre = cell[6],
+                modalidad = cell[8])        
+        alumn._especialidad = cell[10] if cell[-1] != "" else next
+            
+        alumn.is_alumn_empty()
 
     
-        
+    
     """ 
     TODO
-        4. Add it to an instance of alumno
-            METHODS:
-            Create the validation test for alumn data
-            _Edit alumn data
         5. Append instance to dict?? Corroborate to match with MongoDB
         6. Create MongoDB data base
         7. Check for duplicates

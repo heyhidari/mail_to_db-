@@ -73,4 +73,13 @@ class Alumno:
             self._curp = input("Type the correct CURP: ")
 
     def is_alumn_empty(self):
+        if self._primer_ap is (None or ""):
+            self._curp = input("Ingresa una curp correcta: ")
+        elif self._segundo_ap is (None or ""):
+            self._segundo_ap = input("Ingresa un segundo apellido, si no cuenta con uno presiona #")
+        elif self._nombre is (None or ""):
+            self._nombre = input("Ingresa el nombre")
+        elif self._modalidad is (None or ""):
+            self._modalidad = input("Ingresa la modalidad de titulación")
+        
         
