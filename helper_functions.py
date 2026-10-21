@@ -1,5 +1,13 @@
-import helper_objects as obj
+"""
+Functions to manipulate files.
 
+This functions allow to interact with the files, such as to modify their name. 
+
+TODO:
+Migrate as many fuctions as possible from main to craete a more readable program.
+"""
+
+# Function to modify the name of a file.
 def file_name_mod(filename: str):
     # Get the file extension
     extension = filename.rsplit(".",2)
