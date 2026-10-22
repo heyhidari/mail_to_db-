@@ -2,3 +2,4 @@
 __pycache__/
 uabjoenv/
 db_connection.py
+.env
