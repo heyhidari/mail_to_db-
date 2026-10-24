@@ -22,3 +22,7 @@ def file_name_mod(filename: str):
     return f'{facultad}_{grado}_{carrera}_{fecha}.{extension}'
     
 
+# Function to extract all variations of acronyms
+def acronym_extraction(acronyms: str):    
+    # Split and return acronyms string separated by |
+    return acronyms.strip.split("|")

@@ -36,17 +36,7 @@ Mesas{
 Escuelas{
     escuela_id:     autonumber, not null, PRIMARY_KEY
     Nombre:         string, not null, unique                        # Solo puede existir un único registro por escuela 
-}
-
-SiglasEscuelas{
-    siglas_id:      autonumber, not null, PRIMARY_KEY
-    Siglas:         string, not null, unique                        # Solo puede existir un único registro de variación de siglas
-    Escuela:        int, not null, foreign_key(Escuela)             # Unas siglas solo corresponden a una escuela
-}
-
-GradosAcademicos{
-    grado_id:       autonumber, not null, PRIMARY_KEY
-    Nombre:         string, not null, unique                        # Solo puede haber un nombre de grado
+    Siglas:         string, not null                                # Se creará un string concatenando las variaciones, divididas por |, recuperar toda la cadena y verificar que haya compatibilidad.
 }
 
 Carreras{
@@ -54,6 +44,10 @@ Carreras{
     Nombre:         string, not null, unique                        # Solo puede haber un nombre de carrera, verificar variaciones
     grado:          int, not null, foreign_key(GradosAcademicos)    # Un grado por carrera, este par subsana las carreras que comparten nombre en otros grados
     mesaSG:         int, not null, foreign_key(Mesas)
+    GradosAcademicos{
+        grado_id:   autonumber, not null, PRIMARY_KEY
+        Nombre:     string, not null, unique                        # Solo puede haber un nombre de grado
+    }
 }
 
 Envíos{
@@ -76,8 +70,9 @@ import pymongo
 from db_connection import db
 
 # This function inserts one student record, needs an alumno and Escuela
-def student_insert_one():
+def student_insert_one(datos_alumno: dict):
     print("Inserting one record")
+    return db.al
 
 
 # this function inserts a bulk of students from a single Escuela
