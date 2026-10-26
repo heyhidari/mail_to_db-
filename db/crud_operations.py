@@ -8,10 +8,10 @@ If changes are to be made to the DB, this part must be updated.
 SCHEMA
 ==========
 Alumni{
-    CURP:           string, not null, PRIMARY_KEY                   # CURP del alumno, validado por re.match
-    Apellido_1:     string, not null                                # Primer apellido
-    Apellido_2:     string,                                         # Segundo apellido opcional
-    Nombre:         string, not null                                # Nombre(s) del alumno
+    curp:           string, not null, PRIMARY_KEY                   # CURP del alumno, validado por re.match
+    apellido_1:     string, not null                                # Primer apellido
+    apellido_2:     string,                                         # Segundo apellido opcional
+    nombre:         string, not null                                # Nombre(s) del alumno
 }
 
 Estudios{
@@ -31,36 +31,31 @@ Mesas{
     _id:            auto, not null, PRIMARY_KEY
     nombre:         string, not null                                # Nombre de la encargada de mesa
     numero:         int, not null                                   # Número de mesa
-}   CREATED AND FED
+}   ### CREATED AND FED
 
 Escuelas{
     escuela_id:     autonumber, not null, PRIMARY_KEY
-    Nombre:         string, not null, unique                        # Solo puede existir un único registro por escuela 
-    Siglas:         string, not null                                # Se creará un string concatenando las variaciones, divididas por |, recuperar toda la cadena y verificar que haya compatibilidad.
+    nombre:         string, not null, unique                        # Solo puede existir un único registro por escuela 
+    siglas:         string, not null                                # Se creará un string concatenando las variaciones, divididas por |, recuperar toda la cadena y verificar que haya compatibilidad.
 }
 
 Carreras{
     carrera_id:     autonumbre, not null, PRIMARY_KEY
-    Nombre:         string, not null, unique                        # Solo puede haber un nombre de carrera, verificar variaciones
+    nombre:         string, not null, unique                        # Solo puede haber un nombre de carrera, verificar variaciones
     grado:          int, not null, foreign_key(GradosAcademicos)    # Un grado por carrera, este par subsana las carreras que comparten nombre en otros grados
     mesaSG:         int, not null, foreign_key(Mesas)
-    GradosAcademicos{
-        grado_id:   autonumber, not null, PRIMARY_KEY
-        Nombre:     string, not null, unique                        # Solo puede haber un nombre de grado
-    }
 }
 
 Envíos{
     id:             autonumber, not null, PRIMARY_KEY
-    Fecha:          datetime, not null                              # Fecha en que se hace el envío
-    Cantidad:       int, not null                                   # Cantidad de expedientes que envía
-    Escuela:        int, not null, foreign_ke(Escuelas)             # Escuela que hace el envío
-    Responsables    {
+    fecha:          datetime, not null                              # Fecha en que se hace el envío
+    cantidad:       int, not null                                   # Cantidad de expedientes que envía
+    escuela:        int, not null, foreign_ke(Escuelas)             # Escuela que hace el envío
+    responsables    {
         responsable_id: autonumber, not null, PRIMARY_KEY
-        Nombre:         string, not null, unique                    # Solo puede existir un nombre, verificar las variaciones
-        Telefono:       string, not null                            # Número telefónico de contacto
-        Correo:         string, not null                            # Correo electrónico de contacto
-        Escuela:        int, not null, foreign_key(Carreras)        # Un responsable por carrera, verificar que no se repitan
+        nombre:         string, not null, unique                    # Solo puede existir un nombre, verificar las variaciones
+        telefono:       string, not null                            # Número telefónico de contacto
+        correo:         string, not null                            # Correo electrónico de contacto
     }
 }
     
