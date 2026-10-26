@@ -31,7 +31,7 @@ Mesas{
     _id:            auto, not null, PRIMARY_KEY
     nombre:         string, not null                                # Nombre de la encargada de mesa
     numero:         int, not null                                   # Número de mesa
-}
+}   CREATED AND FED
 
 Escuelas{
     escuela_id:     autonumber, not null, PRIMARY_KEY
