@@ -67,7 +67,7 @@ from db_connection import db
 # This function inserts one student record, needs an alumno and Escuela
 def student_insert_one(datos_alumno: dict):
     print("Inserting one record")
-    return db.al
+    return
 
 
 # this function inserts a bulk of students from a single Escuela
@@ -88,3 +88,5 @@ def carrera_insert_one():
 # This function inserts a new mesa
 def mesa_insert_one():
     print("Inserting a new mesa")
+
+
