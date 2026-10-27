@@ -95,18 +95,92 @@ def create_carreras():
             }
         }
     })
+    print(carreras)
 
 
 def create_envios():
-    envios = ""
+    envios = db.create_collection("envios", {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Envíos Object Validator",
+                "required": ["fecha", "cantidad", "escuela"],
+                "properties": {
+                    "fecha": {
+                        "bsonType": "date",
+                        "description": "Fecha de envío de listado de expedientes"
+                    },
+                    "cantidad": {
+                        "bsonType": "int",
+                        "description": "Cantidad de expedientes en el listado"
+                    },
+                    "escuela": {
+                        "bsonType": "objectid",
+                        "description": "Escuela que envía el listado" ### TODO, asignar el objectId que corresponda
+                    }
+                }
+            }
+        }
+    })
+    print(envios)
 
 
 def create_alumni():
-    alumni = ""
+    alumni = db.create_collection("alumni", {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Alumni Object Validator",
+                "required": ["curp", "apellido_1", "nombre"],
+                "properties": {
+                    "curp": {
+                        "bsonType": "string",
+                        "description": "CURP del alumno, debe ser única y está verificada por ReGex"
+                    },
+                    "apellido_1": {
+                        "bsonType": "string",
+                        "description": "Primer apellido del alumno, el segundo es opcional"    
+                    },
+                    "nombre": {
+                        "bsonType": "string",
+                        "description": "Nombre(s) del alumno, debe poder hacer queries"
+                    }
+                }
+            }
+        }
+    })
+    print(alumni)
 
 
 def create_estudios():
-    estudios = ""
+    estudios = db.create_collection("estudios", {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Estudios Object Validator",
+                "required": ["curp", "carrera", "modalidad", "envio"],
+                "properties": {
+                    "curp":{
+                        "bsonType": "objectid",
+                        "description": "El Id del alumno que corresponda"
+                    },
+                    "carrera": {
+                        "bsonType": "objectid",
+                        "description": "El Id de la carrera que corresponda"
+                    },
+                    "modalidad": {
+                        "bsonType": "string",
+                        "description": "Modalidad de titulación"
+                    },
+                    "envio": {
+                        "bsonType": "objectid",
+                        "description": "El Id del envío que quedó registrado"
+                    }
+                }
+            }
+        }
+    })
+    print(estudios)
 
 
 if __name__ == "__main__":

@@ -52,7 +52,7 @@ Envíos{
     cantidad:       int, not null                                   # Cantidad de expedientes que envía
     escuela:        int, not null, foreign_ke(Escuelas)             # Escuela que hace el envío
     responsables    {
-        responsable_id: autonumber, not null, PRIMARY_KEY
+        responsable_id: autonumber
         nombre:         string, not null, unique                    # Solo puede existir un nombre, verificar las variaciones
         telefono:       string, not null                            # Número telefónico de contacto
         correo:         string, not null                            # Correo electrónico de contacto
