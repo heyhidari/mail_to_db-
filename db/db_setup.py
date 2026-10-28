@@ -23,15 +23,15 @@ def collections_create():
         collections = db.list_collection_names()
         if not "mesas" in collections:
             create_mesas()
-        elif not "escuelas" in collections:
+        if not "escuelas" in collections:
             create_escuelas()
-        elif not "carreras" in collections:
+        if not "carreras" in collections:
             create_carreras()
-        elif not "envios" in collections:
+        if not "envios" in collections:
             create_envios()
-        elif not "alumni" in collections:
+        if not "alumni" in collections:
             create_alumni()
-        elif not "estudios" in collections:
+        if not "estudios" in collections:
             create_estudios()
         else:
             print("All collections have been created.")
@@ -101,7 +101,7 @@ def create_carreras():
                     "description": "Grado académico que corresponde a la carrera"
                 },
                 "mesaSG": {
-                    "bsonType": "objectid",
+                    "bsonType": "objectId",
                     "description": "ID de la mesa que corresponde" ### TODO ¿cómo asignar este valor?
                 }
             }
@@ -127,7 +127,7 @@ def create_envios():
                     "description": "Cantidad de expedientes en el listado"
                 },
                 "escuela": {
-                    "bsonType": "objectid",
+                    "bsonType": "objectId",
                     "description": "Escuela que envía el listado" ### TODO, asignar el objectId que corresponda
                 }
             }
@@ -171,11 +171,11 @@ def create_estudios():
             "required": ["curp", "carrera", "modalidad", "envio"],
             "properties": {
                 "curp":{
-                    "bsonType": "objectid",
+                    "bsonType": "objectId",
                     "description": "El Id del alumno que corresponda"
                 },
                 "carrera": {
-                    "bsonType": "objectid",
+                    "bsonType": "objectId",
                     "description": "El Id de la carrera que corresponda"
                 },
                 "modalidad": {
@@ -183,7 +183,7 @@ def create_estudios():
                     "description": "Modalidad de titulación"
                 },
                 "envio": {
-                    "bsonType": "objectid",
+                    "bsonType": "objectId",
                     "description": "El Id del envío que quedó registrado"
                 }
             }
