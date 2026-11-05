@@ -17,28 +17,36 @@ https://www.mongodb.com/docs/manual/core/schema-validation/specify-json-schema/
 
 '''
 from db_connection import db
-# Run all collections
-def collections_create():
+# Create collections and indexes
+def collections_and_index_create():
+    success = ["mesas","escuelas","carreras","envios","alumni","estudios"]
+    counter = 0
     try:
         collections = db.list_collection_names()
-        if not "mesas" in collections:
-            create_mesas()
-        if not "escuelas" in collections:
-            create_escuelas()
-        if not "carreras" in collections:
-            create_carreras()
-        if not "envios" in collections:
-            create_envios()
-        if not "alumni" in collections:
-            create_alumni()
-        if not "estudios" in collections:
-            create_estudios()
-        else:
-            print("All collections have been created.")
+        if not "mesas" in collections: create_mesas()
+        if not "escuelas" in collections: create_escuelas()
+        if not "carreras" in collections: create_carreras()
+        if not "envios" in collections: create_envios()
+        if not "alumni" in collections: create_alumni()
+        if not "estudios" in collections: create_estudios()
+
+        for coll in success:
+            if coll in collections: counter += 1
+        if counter ==  len(success): 
+            print("All collections and indexes have been created.")
+            counter = 0
+        else: print("One or more collections were not created, connect to Atlas for further exploration")
     except Exception as e: print(e)
-    
+
+    try:
+        collections = db.list_collection_names() 
+        if "carreras" in collections: create_carreras_index()
+        if "alumni" in collections: create_alumni_index() 
+
+    except Exception as e: print(e)
 
 
+# COLLECTIONS
 def create_mesas():
     mesas_validator = {
         "$jsonSchema": { 
@@ -193,5 +201,21 @@ def create_estudios():
     print(estudios)
 
 
+# INDEXES
+def create_carreras_index():
+    try: 
+        db.carreras.create_index("nombre",name="carreras_idx", unique=False)
+        print("carreras_index created successfully")
+    except Exception as e: print("Error while deploying the carrera index due to:\n", e)
+
+
+def create_alumni_index():
+    try: 
+        db.alumni.create_index("curp",name="carreras_idx", unique=True)
+        print("alumni_index created successfully")
+    except Exception as e: print("Error while deploying the alumni index due to:\n", e)
+    
+
 if __name__ == "__main__":
-    collections_create()
+    collections_and_index_create()
+    
