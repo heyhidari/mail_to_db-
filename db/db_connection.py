@@ -1,5 +1,5 @@
 """
-This file contains the connection string and 
+This file contains the connection string summoning and 
 other necessary elements for the data base in MongoDB to
 function properly along with this app. 
 """
@@ -26,7 +26,7 @@ def main():
         else:
             print("Connection test succesful, starting Client Connection:\n")
             
-            # TEMPORARY CLOSE FOR DEVELOPING. Remove
+            # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
             myClient.close()
     else:
         print("Falló la conexión al servidor de la DB")
