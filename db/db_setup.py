@@ -204,15 +204,20 @@ def create_estudios():
 # INDEXES
 def create_carreras_index():
     try: 
-        db.carreras.create_index("nombre",name="carreras_idx", unique=False)
-        print("carreras_index created successfully")
+        if not "carreras_idx" in db.carreras.list_indexes():
+            db.carreras.create_index("nombre", name="carreras_idx", unique=False)
+            print("carreras_idx created successfully")
+        else:
+            print("carreras_idx already exists.")
     except Exception as e: print("Error while deploying the carrera index due to:\n", e)
 
 
 def create_alumni_index():
     try: 
-        db.alumni.create_index("curp",name="carreras_idx", unique=True)
-        print("alumni_index created successfully")
+        if not "alumni_idx" in db.alumni.list_indexes():
+            db.alumni.create_index("curp", name="alumni_idx", unique=True)
+            print("alumni_idx created successfully")
+        else: print("alumni_idx already exists.")
     except Exception as e: print("Error while deploying the alumni index due to:\n", e)
     
 
