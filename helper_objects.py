@@ -53,18 +53,17 @@ class Escuela:
     # Busca datos existentes en la BD para no repetir y para poder vincular a través de _id's
     def data_integrity_and_validation(self, db: object):
         # Busca las siglas en las escuelas
-        with db.Escuelas.find_one({"siglas": {"$regex": self._siglas, "$options": "i"}}) as cursor:
+        if not db.Escuelas.find_one({"siglas": {"$regex": self._siglas, "$options": "i"}}) is None:
             # Si no se encuentran las siglas, ingresa los datos de la escuela y la carrera en cuestión
-            if cursor is None:
-                self._edit_escuela_nombre = input("Ingresa el nombre de la escuela:\n")                                             # Nombre de la Escuela
-                self._edit_escuela_siglas = self._siglas                                                                            # Siglas reconocibles para la escuela
-                self._edit_carrera_nombre = input(f'{"La carrera es:{self._carrera}, ¿estás de acuerdo? (y/n)"}')                   # Nombre de la carrera
-                if not self._edit_carrera_nombre == "y": self._carrera = input("Ingresa el nombre de la carrera que corresponda")    
-                self._edit_carrera_grado = input(f'{"El grado es:{self._grado}, ¿estás de acuerdo? (y/n)"}')                        # Grado de la carrera
-                if not self._edit_carrera_grado == "y": self._grado = input("Ingresa el grado de la carrera que corresponda")
-                self._edit_carrera_mesaSG = int(input(f'{"Ingresa el número de la mesa:\n"}'))                                      # Mesa de SG, buscar el id que corresponda
-                with db.Mesas.find_one({"numero": self._edit_carrera_mesaSG}, {"nombre":0, "numero":0}) as mesa_cursor:
-                    self._edit_carrera_mesaSG = mesa_cursor
+            self._edit_escuela_nombre = input("Ingresa el nombre de la escuela:\n")                                             # Nombre de la Escuela
+            self._edit_escuela_siglas = self._siglas                                                                            # Siglas reconocibles para la escuela
+            self._edit_carrera_nombre = input(f'{"La carrera es:{self._carrera}, ¿estás de acuerdo? (y/n)"}')                   # Nombre de la carrera
+            if not self._edit_carrera_nombre == "y": self._carrera = input("Ingresa el nombre de la carrera que corresponda")    
+            self._edit_carrera_grado = input(f'{"El grado es:{self._grado}, ¿estás de acuerdo? (y/n)"}')                        # Grado de la carrera
+            if not self._edit_carrera_grado == "y": self._grado = input("Ingresa el grado de la carrera que corresponda")
+            self._edit_carrera_mesaSG = int(input(f'{"Ingresa el número de la mesa:\n"}'))                                      # Mesa de SG, buscar el id que corresponda
+            with db.Mesas.find_one({"numero": self._edit_carrera_mesaSG}, {"nombre":0, "numero":0}) as mesa_cursor:
+                self._edit_carrera_mesaSG = mesa_cursor
                 
 
 

@@ -70,7 +70,7 @@ def main():
     sender = obj.Escuela(
         siglas=fac,
         grado=data_from_sender[4],
-        carrera="",
+        carrera=carr,
         fecha_envio=data_from_sender[3],
         num_exp=data_from_sender[2],
         responsable=data_from_sender[1])
