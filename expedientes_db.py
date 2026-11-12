@@ -11,6 +11,7 @@ POR MEJORAR:
 '''
 import helper_objects as obj
 import helper_functions as func
+import db.crud_operations as op
 import readxl as xl
 import readwd as wd
 
@@ -35,7 +36,7 @@ def main():
     else:
         print("File is correct")
     
-    # Analize file name format in case we can retrieve data from here
+    # Analize file name format in case we can retrieve data from here, if not RETURN.
     file_name_format = argv[1].split('_')
     fac = ""
     gdo = ""
@@ -76,6 +77,9 @@ def main():
     sender.is_sender_empty()
 
     print("\n=> testing helper_functions")
+    # Validate sender data with the database
+    sender.data_integrity_and_validation(op.db)
+
     # Check for alumni data, header in table determines some specialties
     alumni_header = []
     alumni_data = []
@@ -120,10 +124,9 @@ def main():
     """ 
     TODO
         5. Append instance to dict?? Corroborate to match with MongoDB
-        6. Create MongoDB data base
-        7. Check for duplicates
-        8. If no duplicates in DB, commit alumni data to it
-        9. Message of success!
+        6. Check for duplicates
+        7. If no duplicates in DB, commit alumni data to it
+        8. Message of success!
     """
 
     
