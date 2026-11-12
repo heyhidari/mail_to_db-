@@ -25,9 +25,7 @@ def main():
         except Exception as e: print("\nHubo un error al conectarse debido a:\n\n", e)
         else:
             print("Connection test succesful, starting Client Connection:\n")
-            
-            # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
-            myClient.close()
+
     else:
         print("Falló la conexión al servidor de la DB")
         return

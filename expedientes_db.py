@@ -52,12 +52,14 @@ def main():
         carr = file_name_format[2]
         fec = file_name_format[3].strip(extension[1]).strip(".")
 
-        print(fac, gdo, carr, fec)
+        print("Esta información viene del nombre del archivo:", fac, gdo, carr, fec)
 
     # Open file
     print("Opening file")
-    archivo = xl.wb(file_name)
-    hoja1 = archivo["Hoja1"]
+    try:
+        archivo = xl.wb(file_name)
+        hoja1 = archivo["Hoja1"]
+    except Exception as e: print("Hubo un error al abrir el archivo, el motivo es:\n",e)
 
     # Iterate data sent from Escuela (iter_rows gets data as a single value tuple)
     data_from_sender = []
@@ -66,7 +68,7 @@ def main():
 
     # Create a Escuela instance to analize the contents of the sender
     sender = obj.Escuela(
-        siglas=data_from_sender[0],
+        siglas=fac,
         grado=data_from_sender[4],
         carrera="",
         fecha_envio=data_from_sender[3],
@@ -79,6 +81,9 @@ def main():
     print("\n=> testing helper_functions")
     # Validate sender data with the database
     sender.data_integrity_and_validation(op.db)
+                
+    # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
+    op.db.myClient.close()
 
     # Check for alumni data, header in table determines some specialties
     alumni_header = []

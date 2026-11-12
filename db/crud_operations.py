@@ -62,7 +62,7 @@ Envíos{
 ====
 """
 import pymongo
-from db_connection import db
+from db.db_connection import db
 
 # This function inserts one student record, needs an alumno and Escuela
 def student_insert_one(datos_alumno: dict):
