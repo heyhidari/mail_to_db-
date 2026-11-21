@@ -76,15 +76,12 @@ def main():
         responsable=data_from_sender[1])
 
     # Check for empty values in the sender, (TBD correct and continue)
-    sender.is_sender_empty()
-
-    print("\n=> testing helper_functions")
-    # Validate sender data with the database
-    sender.data_integrity_and_validation(op.db)
+    if not sender.is_sender_empty(): 
+        print("\n=> \nexpedientes_db\n      testing helper_functions")
+        # Validate sender data with the database
+        sender.data_integrity_and_validation(op.db)
+    else 
                 
-    # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
-    op.db.myClient.close()
-
     # Check for alumni data, header in table determines some specialties
     alumni_header = []
     alumni_data = []
@@ -111,8 +108,7 @@ def main():
     # Read the alumni data, create Alumno instances and validate data structure.
     for cell in hoja1.iter_rows(min_row=20, min_col=2, max_col=12, values_only=True): 
         for i in range(0, 10):
-            if cell[i] == None:
-                cell[i] = "" 
+            print(i)
 
         alumn = obj.Alumno(
                 CURP = cell[0],
@@ -141,6 +137,10 @@ def main():
     print("Closing file")
     archivo.close()
 
+                        # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
+    op.myClient.close()
+
+
     print("TEST END")
     return
 
@@ -158,7 +158,6 @@ def main():
         """
     else:
         print('Processing file')
-
     
 
 if __name__ == '__main__':

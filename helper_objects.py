@@ -18,26 +18,31 @@ class Escuela:
         self._responsable = responsable
 
         # Variables necesarias para crear un nuevo registro de Escuela
-        self._edit_escuela_nombre = ""
-        self._edit_escuela_siglas = ""
-        self._edit_carrera_nombre = ""
-        self._edit_carrera_grado = ""
-        self._edit_carrera_mesaSG = ""
+        self._edit_escuela_nombre = "na"
+        self._edit_escuela_siglas = "na"
+        self._edit_carrera_nombre = "na"
+        self._edit_carrera_grado = "na"
+        self._edit_carrera_mesaSG = "na"
 
     def __str__(self):
         return f'{self._siglas}, a través de {self._responsable} envía {self._expedientes} expedientes de {self._grado} en {self._carrera} en la fecha {self._fecha_envio}'
 
     # Verifica que los datos de la Unidad Académica sean correctos
     def is_sender_empty(self):
+        empty = False
         for item in self.__dict__.items():
-            if item[1] == "" or item[1] == None:
+            if item[1] == "" or item[1] == None: # item[0] es el key, item[1] el value
                 self.__mod_sender()
+                empty = True
             else:
                 continue
         
         print("Los datos del remitente parecen ser correctos:")
         for item in self.__dict__.items():
             print(item[0], ": ", item[1])
+            
+        return empty
+    
 
     # Reescribe atributos si los datos de la Unidad Académica que envía son Nulos o Incorrectos
     def __mod_sender(self):
