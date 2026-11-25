@@ -29,31 +29,34 @@ class Escuela:
 
     # Verifica que los datos de la Unidad Académica sean correctos
     def is_sender_empty(self):
+        required = ["_siglas", "_grado", "_carrera", "_fecha_envio", "_expedientes", "_responsable"]
         empty = False
-        for item in self.__dict__.items():
-            if item[1] == "" or item[1] == None: # item[0] es el key, item[1] el value
-                self.__mod_sender()
+
+        for attribute in required:
+            value = getattr(self, attribute)
+            if value == "" or value == None:
+                self.__mod_sender(attribute)
                 empty = True
             else:
                 continue
-        
-        print("Los datos del remitente parecen ser correctos:")
-        for item in self.__dict__.items():
-            print(item[0], ": ", item[1])
-            
+
+        if empty == True:
+            print("Los datos del remitente estaban incompletos, ahora son:")
+            for attribute in required:
+                print(f'{attribute}: {getattr(self, attribute)}')
+
         return empty
     
 
     # Reescribe atributos si los datos de la Unidad Académica que envía son Nulos o Incorrectos
-    def __mod_sender(self):
+    def __mod_sender(self, attribute_to_modify):
         try:
-            if self._siglas == "" or self._siglas == None: self._siglas = input("Escriba la Unidad Académica que corresponda:\n")
-            if self._grado == "" or self._grado == None: self._grado = input("Escriba el grado académico que corresponda:\n")
-            if self._carrera == "" or self._carrera == None: self._carrera = input("Escriba la carrera que corresponda\n")
-            if self._fecha_envio == "" or self._fecha_envio == None: self._fecha_envio = input("Escriba la fecha de envío que corresponda (dd/mm/aaaa)\n")
-            if self._expedientes == "" or self._expedientes == None: self._expedientes = int(input("Escriba con número la cantidad de expedientes que corresponda\n"))
-            if self._responsable == "" or self._responsable == None: self._responsable = input("Escriba el nombre de la persona responsable del envío\n")
+            value = input(f'Ingrese el valor de {attribute_to_modify}')
+            self.__setattr__(attribute_to_modify, value)
+
         except Exception as e: print("Algo salió mal al ingresar los datos. Intenta de nuevo o revisa el siguiente problema:\n", e)
+        else:
+            return f'Se modificó {attribute_to_modify} con el valor: {value}'
 
     # Busca datos existentes en la BD para no repetir y para poder vincular a través de _id's
     def data_integrity_and_validation(self, db: object):

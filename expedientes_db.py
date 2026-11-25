@@ -11,7 +11,7 @@ POR MEJORAR:
 '''
 import helper_objects as obj
 import helper_functions as func
-import db.crud_operations as op
+#import db.crud_operations as op
 import readxl as xl
 import readwd as wd
 
@@ -76,11 +76,10 @@ def main():
         responsable=data_from_sender[1])
 
     # Check for empty values in the sender, (TBD correct and continue)
-    if not sender.is_sender_empty(): 
-        print("\n=> \nexpedientes_db\n      testing helper_functions")
+    sender.is_sender_empty()
+    print("\n=> \nexpedientes_db\n      testing helper_functions")
         # Validate sender data with the database
-        sender.data_integrity_and_validation(op.db)
-    else 
+    sender.data_integrity_and_validation(op.db)
                 
     # Check for alumni data, header in table determines some specialties
     alumni_header = []
