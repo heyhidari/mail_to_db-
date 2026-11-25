@@ -11,7 +11,7 @@ POR MEJORAR:
 '''
 import helper_objects as obj
 import helper_functions as func
-#import db.crud_operations as op
+import db.crud_operations as crud_ops
 import readxl as xl
 import readwd as wd
 
@@ -79,7 +79,7 @@ def main():
     sender.is_sender_empty()
     print("\n=> \nexpedientes_db\n      testing helper_functions")
         # Validate sender data with the database
-    sender.data_integrity_and_validation(op.db)
+    sender.data_integrity_and_validation(crud_ops.db)
                 
     # Check for alumni data, header in table determines some specialties
     alumni_header = []
@@ -130,14 +130,14 @@ def main():
     """
 
     
-    print(" <= testing helper_functions\n")
+    print(" <= \nEND testing helper_functions\n")
 
     # Close file
     print("Closing file")
     archivo.close()
 
                         # TEMPORARY CLOSE FOR DEVELOPING. Remove and add to end of operations or EOF
-    op.myClient.close()
+    crud_ops.myClient.close()
 
 
     print("TEST END")
