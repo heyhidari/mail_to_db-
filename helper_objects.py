@@ -61,22 +61,35 @@ class Escuela:
 
     # Busca datos existentes en la BD para no repetir y para poder vincular a través de _id's
     def data_integrity_and_validation(self, db: object):
+        # Variables para determinar si las siglas, escuela y carrera son nuevos
+        new_escuela = False
+        new_carrera = False
+
         print(f'Entering data_integrity_and_validation:')
         # Busca las siglas en las escuelas
         if db.escuelas.find_one({"siglas": {"$regex": self._siglas, "$options": "i"}}) is None:
             print(f'No hay coincidencias de escuela para "{self._siglas}"')
 
             # Si no se encuentran las siglas, ingresa los datos de la escuela y la carrera en cuestión
-            self._edit_escuela_nombre = input("Ingresa el nombre de la escuela:\n")                              
-            self._edit_escuela_siglas = self._siglas                                                             
+            self._edit_escuela_nombre = input("Ingresa el nombre de la escuela:\n")       
 
+            # Comprueba que la escuela no exista. Si no, cambia new_escuela para que se haga el envío de datos.
+            if db.escuelas.find_one({"nombre": {"$regex": self._edit_escuela_nombre, "$options": "i"}}) is None:                       
+                self._edit_escuela_siglas = self._siglas       
+                new_escuela = True                                                      
+
+            # Verifica el nombre de la carrera
             self._edit_carrera_nombre = input(f'La carrera es: {self._carrera}, ¿estás de acuerdo? (y/n)')       
             if not self._edit_carrera_nombre == "y": self._carrera = input("Ingresa el nombre de la carrera que corresponda\n") 
             ans = "n"   
             while ans != "y":
                 ans = input(f'La carrera elegida es: {self._carrera}, ¿estás de acuerdo? (y/n)')
                 if ans == "n": self._carrera = input("Ingresa el nombre de la carrera que corresponda\n")
-            
+
+            # Comprueba que la carrera no exista
+            if db.carreras.find_one({"nombre": {"$regex": self._carrera, "$options": "i"}}) is None:
+                new_carrera = True
+
             self._edit_carrera_grado = input(f'El grado es: {self._grado}, ¿estás de acuerdo? (y/n)')            
             if not self._edit_carrera_grado == "y": self._grado = input("Ingresa el grado de la carrera que corresponda\n")
             ans = "n"
@@ -90,7 +103,7 @@ class Escuela:
             else:
                 self._edit_carrera_mesaSG = db.mesas.find_one({"numero": self._edit_carrera_mesaSG}, {"nombre":0, "numero":0}).get("_id")
 
-            return f'Los datos ingresados son: {self._edit_escuela_siglas}, {self._edit_escuela_nombre}, {self._edit_carrera_nombre}, {self._edit_carrera_grado}, Mesa: {self._edit_carrera_mesaSG}'
+            return [new_escuela, new_carrera]
 
 class Alumno:
     def __init__(self, CURP:str, primer_ap:str, segundo_ap:str, nombre: str, modalidad:str = "", especialidad:str = ""):
